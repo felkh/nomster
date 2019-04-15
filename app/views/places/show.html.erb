@@ -84,7 +84,7 @@
         </button>
         <h4 class="modal-title" id="myModalLabel">Add a photo</h4>
       </div>
-      <%= simple_form_for @comment, url: place_comments_path(@place) do |f| %>
+      <%= simple_form_for @comment, url: place_photos_path(@place) do |f| %>
         <div class="modal-body">
           <%= f.input :message %>
           <%= f.input :rating, as: :select, collection: Comment::RATINGS %>
@@ -125,6 +125,18 @@
     </div>
   <% end %>
 </div>
+
+<h1>Photos</h1>
+
+<% @place.photos.each do |photo| %>
+  <div>
+    <blockquote>
+      <b><%= comment.rating %></b> -
+        <%= comment.caption %>
+      <small><%= comment.user.email %></small>
+    </blockquote>
+  </div>
+<% end %>
 
 
 
