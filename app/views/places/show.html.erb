@@ -84,10 +84,10 @@
         </button>
         <h4 class="modal-title" id="myModalLabel">Add a photo</h4>
       </div>
-      <%= simple_form_for @comment, url: place_photos_path(@place) do |f| %>
+      <%= simple_form_for @photo, url: place_photos_path(@place) do |f| %>
         <div class="modal-body">
-          <%= f.input :message %>
-          <%= f.input :rating, as: :select, collection: Comment::RATINGS %>
+          <%= f.input :picture %>
+          <%= f.input :caption %>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -126,17 +126,21 @@
   <% end %>
 </div>
 
-<h1>Photos</h1>
+<div class="clear"></div>
 
-<% @place.photos.each do |photo| %>
-  <div>
-    <blockquote>
-      <b><%= comment.rating %></b> -
-        <%= comment.caption %>
-      <small><%= comment.user.email %></small>
-    </blockquote>
-  </div>
-<% end %>
+<div class="row">
+  <% @place.comments.each do |comment| %>
+    <div class="col-12 col-sm-6">
+      <blockquote>
+        <% if comment.humanized_rating.present? %>
+          <b><%= comment.rating %></b> -
+        <% end %>
+        <%= comment.message %>
+        <small><%= comment.user.email %></small>
+      </blockquote>
+    </div>
+  <% end %>
+</div>
 
 
 
