@@ -8,6 +8,15 @@
       <small><%= place.user.email %></small>
     <% end %>
 
+<% if place.photos.present? %>
+  <div class="col-12">
+      <% place.photos.each do |photo| %>
+    <%= image_tag photo.picture.url, class: 'col-md-4' %>
+    <%= photo.caption %>
+<% end %>
+  </div>
+    <% end %>
+
 <% if place.comments.present? %>
   <div class="col-12">
     <blockquote>
@@ -21,6 +30,7 @@
 <% end %>
   </div>
 <% end %>
+
 
 
 <%= paginate @places %>
